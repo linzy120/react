@@ -14,8 +14,9 @@ import StateChange from './StateChange';
 import AreaList from './AreaList';
 import SeachPage from './SeachPage';
 import TabView from './TabView';
+import WebView from './WebView';
 
-class AwesomeProject2 extends Component {
+class AwesomeProject extends Component {
 
 	rendNavigator = (route, navigator) => {
 		switch(route.id){
@@ -30,8 +31,10 @@ class AwesomeProject2 extends Component {
 							<Button text="改变视图" onPress={() => navigator.push({title:'更改state',id:'StateChange'})} />
 							<Button text="省份列表" onPress={() => navigator.push({title:'省份列表',id:'AreaList'})} />
 							<Button text="搜索页面" onPress={() => navigator.push({title:'搜索页面',id:'SeachPage'})} />
-							<Button text="scrollable-tab-view" onPress={() => navigator.push({title:'scrollable-tab-view测试',id:'TabView'})} />
-						</View>
+							<Button text="ScrollableTabView" onPress={() => navigator.push({title:'scrollable-tab-view测试',id:'TabView'})} />
+						  <Button text="WebView" onPress={() => navigator.push({title:'WebView页面',id:'WebView'})} />
+            </View>
+            <Text>------------------------</Text>
 					</View>
 				);
 				break;
@@ -74,6 +77,15 @@ class AwesomeProject2 extends Component {
 						</View>
 					</View>
 				);
+      case 'WebView' : 
+        return (
+          <View style={styles.flex}>
+            <TopTitle  title={route.title} onPress={() => navigator.push({title:'首页',id:'main'})} />
+            <View style={styles.flex}>
+              <WebView />
+            </View>
+          </View>
+        );
 			default : 
 				return false;
 		}
@@ -108,4 +120,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-AppRegistry.registerComponent('AwesomeProject2', () => AwesomeProject2);
+AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
