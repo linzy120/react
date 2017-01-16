@@ -14,13 +14,13 @@ export default React.createClass({
 			renderTabBar={() => <DefaultTabBar/>}
 			// 默认打开第几个（0为第一个）
 			//initialPage={1}
-			tabBarPosition='bottom'
-			// 选中
-			tabBarUnderlineColor='red'
+			tabBarPosition='top'
+			// 选中的下划线颜色(可操他娘的没起作用)
+			//tabBarUnderlineColor='red'
 			// 选中的背景颜色
 			tabBarBackgroundColor='#fff'
 			// 选中的文字颜色
-			tabBarActiveTextColor='red'
+			//tabBarActiveTextColor='red'
 			// 未选中的文字颜色
 			tabBarInactiveTextColor='#333'
 			tabBarTextStyle={{fontSize: 18}}

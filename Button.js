@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 		backgroundColor : 'green',
 		justifyContent: 'center',
 		alignItems: 'center',
-		margin : 10,
+		margin : 5,
 	},
 	btnText : {
 		color : '#fff',
