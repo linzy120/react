@@ -55,6 +55,10 @@ export default class Web_View extends Component {
     			onNavigationStateChange={(navState) => {
     				console.log(navState);
     			}}
+
+    			onMessage={(e)=>{
+    				console.log(JSON.parse(e.nativeEvent.data));
+    			}}
     		>
     		</WebView>
     	</View>

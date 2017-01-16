@@ -16,7 +16,7 @@ import SeachPage from './SeachPage';
 import TabView from './TabView';
 import WebView from './WebView';
 
-class AwesomeProject extends Component {
+class AwesomeProject2 extends Component {
 
 	rendNavigator = (route, navigator) => {
 		switch(route.id){
@@ -33,8 +33,8 @@ class AwesomeProject extends Component {
 							<Button text="搜索页面" onPress={() => navigator.push({title:'搜索页面',id:'SeachPage'})} />
 							<Button text="ScrollableTabView" onPress={() => navigator.push({title:'scrollable-tab-view测试',id:'TabView'})} />
 						  <Button text="WebView" onPress={() => navigator.push({title:'WebView页面',id:'WebView'})} />
-            </View>
-            <Text>------------------------</Text>
+			            </View>
+			            <Text>------------------------</Text>
 					</View>
 				);
 				break;
@@ -104,11 +104,13 @@ class AwesomeProject extends Component {
 const styles = StyleSheet.create({
 	flex : {
 		flex : 1,
+		backgroundColor : '#fff',
 	},
 	menuBox : {
 		flex : 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+		backgroundColor : '#fff',
 	},
 	title : {
 		marginBottom : 20,
@@ -120,4 +122,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+AppRegistry.registerComponent('AwesomeProject2', () => AwesomeProject2);

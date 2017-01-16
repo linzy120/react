@@ -32,14 +32,16 @@ export default class AreaList extends Component {
            dataSource: new ListView.DataSource({
                rowHasChanged: (row1, row2) => row1 !== row2,
            }),
+           list : [],
+           list_state : [],
            loaded: false,
            menu : false,
            state_hide_view : this.hide_view,
            downup : 'angle-up',
-           number : 0,
        };
 
        this.readRow = this.readRow.bind(this);
+       this.update_state = this.update_state.bind(this);
   }
 
   //数据加载完毕后执行
@@ -56,15 +58,26 @@ export default class AreaList extends Component {
 
     //automaticallyAdjustContentInsets={false}
     //contentContainerStyle={styles.list_view}
+    // return (
+    //   <View>
+    //     <ListView 
+    //       dataSource={this.state.dataSource} 
+    //       renderRow={this.readRow} 
+    //       onEndReached={this.data_end}
+    //       onEndReachedThreshold={10}
+    //     />
+    //   </View>
+    // );
+
     return (
-      <View>
-        <ListView 
-          dataSource={this.state.dataSource} 
-          renderRow={this.readRow} 
-          onEndReached={this.data_end}
-          onEndReachedThreshold={10}
-        />
-      </View>
+      <ScrollView 
+        ref={(scrollView) => { 
+          console.log(scrollView);
+          _scrollView = scrollView; 
+        }}
+        style={styles.scrollView}>
+        {this.state.list.map(this.createCardRow)}
+      </ScrollView>
     );
   }
 
@@ -75,6 +88,7 @@ export default class AreaList extends Component {
     .then((responseJson) => {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(responseJson.regionAry[0].child),
+        list : responseJson.regionAry[0].child,
         loaded: true,
       });
     })
@@ -93,32 +107,74 @@ export default class AreaList extends Component {
   };
 
   update_state = () => {
-    this.setState({
-      menu : !this.state.menu,
-      downup : this.state.downup == 'angle-up' ? 'angle-down' : 'angle-up',
-    });
-    console.log(this.state);
+    let {key} = this.props;
+    console.log({key});
+    // this.setState({
+    //   menu : !this.state.menu,
+    //   downup : this.state.downup == 'angle-up' ? 'angle-down' : 'angle-up',
+    // });
   };
 
   //添加每一行数据和样式
   readRow = (city) => {
-    //console.log(city);
+    //console.log(city.child);
+    //let city_child = city.child;
     return (
       <View>
-        <TouchableOpacity onPress={this.update_state}>
-          <View style={styles.city_box}>
-            <Image 
-              source={{uri : city.griImg}}
-              style={styles.city_img}
-            />
+        <View>
+          <TouchableOpacity onPress={this.update_state}>
+            <View style={styles.city_box}>
+              <Image 
+                source={{uri : city.griImg}}
+                style={styles.city_img}
+              />
 
-            <View style={styles.city_txt_box}>
-              <Text style={styles.city_name}>{city.region_name}</Text>
-              <Icon name={this.state.downup} size={18} color="#666" />
+              <View style={styles.city_txt_box}>
+                <Text style={styles.city_name}>{city.region_name}</Text>
+                {
+                  this.state.downup == 'angle-up' ?
+                    <Icon name='angle-up' size={18} color="#666" /> : 
+                    <Icon name='angle-down' size={18} color="#666" />
+                }
+              </View>
             </View>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
       </View>
+    );
+  };
+
+  // 批量创建
+  createCardRow = (province, i) => {
+      let _i = i;
+      let _state = this.state.list_state[_i] != 'undefined' && this.state.list_state[_i] ? true : false;
+      //console.log(this.state.list_state[_i]);
+      //console.log(_state);
+      return (
+        <View key={_i}>
+          <TouchableOpacity onPress={(_i) => {
+            //this.setState({
+              //list_state[_i] : !this.state.list_state[_i]
+            //});
+            console.log(_i);
+          }}>
+            <View style={styles.city_box}>
+              <Image 
+                source={{uri : province.griImg}}
+                style={styles.city_img}
+              />
+
+              <View style={styles.city_txt_box}>
+                <Text style={styles.city_name}>{province.region_name}</Text>
+                {
+                  _state ?
+                    <Icon name='angle-up' size={18} color="#666" /> : 
+                    <Icon name='angle-down' size={18} color="#666" />
+                }
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
     );
   };
 
@@ -170,6 +226,9 @@ export default class AreaList extends Component {
 };
 
 const styles = StyleSheet.create({
+  scrollView : {
+    flex : 1,
+  },
   loading_view : {
     flex : 1,
     flexDirection : 'row',
