@@ -18,7 +18,7 @@ import WebView from './WebView';
 import ProductList from './ProductList';
 
 
-class AwesomeProject extends Component {
+class AwesomeProject2 extends Component {
 
 	rendNavigator = (route, navigator) => {
 		switch(route.id){
@@ -134,4 +134,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+AppRegistry.registerComponent('AwesomeProject2', () => AwesomeProject2);

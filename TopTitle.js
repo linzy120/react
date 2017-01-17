@@ -16,7 +16,7 @@ export default class TopTitle extends Component {
 	    	<View style={styles.topBox}>
 	    		<View style={styles.sideBox}>
 	    			<TouchableHighlight style={styles.btn} onPress={onPress}>
-	    				<Icon name="chevron-left" size={16} color="#888" />
+	    				<Icon name="chevron-left" size={20} color="#888" />
 	    			</TouchableHighlight>
 	    		</View>
 	    		<View style={styles.middleBox}>
